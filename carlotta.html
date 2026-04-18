@@ -338,6 +338,52 @@ footer {
 }
 .barcode { display: flex; gap: 2px; align-items: flex-end; height: 18px; }
 .b { background: var(--rose); opacity: 0.2; width: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 20px; }
+
+  #hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    padding: 100px 24px 60px;
+  }
+  .hero-photo { width: 100%; max-width: 320px; }
+  .hero-text { max-width: 100%; }
+  .hero-name { font-size: 80px; }
+  .hero-desc { text-align: left; }
+  .hero-tags { justify-content: center; }
+
+  .section { padding: 60px 24px; }
+
+  .set-card {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+  .set-badge { align-self: flex-start; }
+
+  .masonry { columns: 2; }
+
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 9px; letter-spacing: 0.1em; }
+
+  #hero { padding: 90px 16px 48px; }
+  .hero-name { font-size: 64px; }
+
+  .section { padding: 48px 16px; }
+
+  .masonry { columns: 1; }
+
+  footer { padding: 20px 16px; }
+}
 </style>
 </head>
 <body>

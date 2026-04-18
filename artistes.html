@@ -302,6 +302,43 @@ footer {
 }
 .barcode { display: flex; gap: 2px; align-items: flex-end; height: 18px; }
 .b { background: var(--rose); opacity: 0.2; width: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 20px; }
+
+  .page-header { padding: 110px 24px 40px; }
+  .page-header-title { font-size: 52px; }
+
+  .filter-bar { padding: 16px 24px; flex-wrap: wrap; }
+
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 32px 24px;
+    gap: 16px;
+  }
+
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 14px 16px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 9px; letter-spacing: 0.1em; }
+
+  .page-header { padding: 90px 16px 32px; }
+  .page-header-title { font-size: 42px; }
+
+  .filter-bar { padding: 14px 16px; }
+
+  .artists-grid {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+  }
+
+  footer { padding: 20px 16px; }
+}
 </style>
 </head>
 <body>
