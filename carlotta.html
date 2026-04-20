@@ -276,40 +276,85 @@ nav {
   flex-shrink: 0;
 }
 
-/* MASONRY */
-.masonry {
-  columns: 3;
-  column-gap: 14px;
+/* GALERIE */
+.galerie-intro {
+  font-size: 10px;
+  color: rgba(204,102,255,0.55);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  border-left: 2px solid rgba(204,102,255,0.2);
+  padding-left: 16px;
+  font-style: italic;
 }
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 14px;
+.galerie-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.galerie-item {
   position: relative;
   overflow: hidden;
   border-radius: 4px;
-  cursor: pointer;
   border: 1px solid rgba(255,62,138,0.08);
+  cursor: default;
+  aspect-ratio: 1 / 1;
 }
-.masonry-item img {
+.galerie-item img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
   filter: saturate(1.1) hue-rotate(-10deg);
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
-.masonry-item:hover img {
-  transform: scale(1.05);
+.galerie-item:hover img {
+  transform: scale(1.07);
   filter: saturate(1.4) hue-rotate(-10deg);
 }
-.masonry-item::after {
+.galerie-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,0,13,0.92) 0%, rgba(5,0,13,0.3) 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px;
+  z-index: 2;
+}
+.galerie-item:hover .galerie-overlay { opacity: 1; }
+.galerie-overlay-num {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--violet);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 0 0 12px rgba(204,102,255,0.8);
+}
+.galerie-overlay-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 0 2px rgba(0,0,0,0.8), 0 0 20px rgba(255,62,138,0.5);
+  margin-bottom: 8px;
+}
+.galerie-overlay-desc {
+  font-size: 9px;
+  color: rgba(224,208,255,0.85);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+}
+.galerie-item::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(255,62,138,0.06) 0%, rgba(180,0,255,0.04) 100%);
+  background: linear-gradient(160deg, rgba(255,62,138,0.05) 0%, rgba(180,0,255,0.03) 100%);
+  z-index: 1;
   pointer-events: none;
-  transition: opacity 0.3s;
-}
-.masonry-item:hover::after {
-  background: linear-gradient(160deg, rgba(255,62,138,0.15) 0%, rgba(180,0,255,0.1) 100%);
 }
 .masonry-ph {
   break-inside: avoid;
@@ -381,7 +426,7 @@ footer {
   }
   .set-badge { align-self: flex-start; }
 
-  .masonry { columns: 2; }
+  .galerie-grid { grid-template-columns: repeat(2, 1fr); }
 
   footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
 }
@@ -395,7 +440,7 @@ footer {
 
   .section { padding: 48px 16px; }
 
-  .masonry { columns: 1; }
+  .galerie-grid { grid-template-columns: 1fr; }
 
   footer { padding: 20px 16px; }
 }
@@ -484,19 +529,48 @@ footer {
 <section class="section" id="galerie">
   <div class="section-header">
     <div class="section-line"></div>
-    <div class="section-title">* Galerie *</div>
+    <div class="section-title">* Le Voyage dula Créateurice *</div>
     <div class="section-line r"></div>
   </div>
-  <div class="masonry">
-    <div class="masonry-item">
-      <img src="images/carlotta/carlotta_1.png" alt="Carlotta">
+  <p class="galerie-intro">De l'inspiration brute à l'atelier de création, pour finir par un portrait de légende du désert.</p>
+  <div class="galerie-grid">
+
+    <div class="galerie-item">
+      <img src="images/carlotta/carlotta_5.png" alt="L'Inspiration Brute">
+      <div class="galerie-overlay">
+        <div class="galerie-overlay-num">01 — L'Inspiration Brute</div>
+        <div class="galerie-overlay-title">La Quête de la Plume</div>
+        <div class="galerie-overlay-desc">Un canyon désertique à couper le souffle, dans l'Utah, aux heures dorées. La pièce manquante de son identité.</div>
+      </div>
     </div>
-    <div class="masonry-item">
-      <img src="images/carlotta/carlotta_2.png" alt="Carlotta">
+
+    <div class="galerie-item">
+      <img src="images/carlotta/carlotta_4.png" alt="L'Atelier Secret de Toulouse">
+      <div class="galerie-overlay">
+        <div class="galerie-overlay-num">02 — L'Atelier Secret de Toulouse</div>
+        <div class="galerie-overlay-title">Le Berceau des Dreadlocks</div>
+        <div class="galerie-overlay-desc">Un atelier d'artiste mansardé dans le centre historique de Toulouse. Les dreadlocks naissent une à une.</div>
+      </div>
     </div>
-    <div class="masonry-item">
-      <img src="images/carlotta/carlotta_4.png" alt="Carlotta">
+
+    <div class="galerie-item">
+      <img src="images/carlotta/carlotta_3.png" alt="Le Grand Récit du Canyon">
+      <div class="galerie-overlay">
+        <div class="galerie-overlay-num">03 — Le Grand Récit du Canyon</div>
+        <div class="galerie-overlay-title">Le Livre des Ancêtres</div>
+        <div class="galerie-overlay-desc">Une alcôve rocheuse dans le Grand Canyon, entourée de pétroglyphes. Gardienne d'une histoire millénaire.</div>
+      </div>
     </div>
+
+    <div class="galerie-item">
+      <img src="images/carlotta/carlotta_1.png" alt="La Légende du Désert">
+      <div class="galerie-overlay">
+        <div class="galerie-overlay-num">04 — La Légende du Désert</div>
+        <div class="galerie-overlay-title">Portrait de la Consécration</div>
+        <div class="galerie-overlay-desc">Le désert du Sahara, coucher de soleil spectaculaire. Caisses estampillées "Carlotta, Artiste Collection".</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
