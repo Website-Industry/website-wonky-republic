@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wonky Republic — Artistes</title>
+<link rel="icon" type="image/png" href="images/Wonky Republic - Favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -52,15 +53,29 @@ nav {
   border-bottom: 1px solid rgba(255,62,138,0.15);
 }
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+  filter: hue-rotate(-30deg) saturate(1.4) drop-shadow(0 0 8px rgba(255,62,138,0.5));
+  transition: filter 0.3s;
+}
+.nav-logo:hover img {
+  filter: hue-rotate(-30deg) saturate(1.6) drop-shadow(0 0 14px rgba(255,62,138,0.8));
+}
+.nav-logo span {
   font-family: 'Righteous', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   background: linear-gradient(90deg, var(--rose), var(--violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: 0.08em;
-  filter: drop-shadow(0 0 8px rgba(255,62,138,0.3));
-  text-decoration: none;
 }
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
@@ -344,7 +359,10 @@ footer {
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Wonky Republic</a>
+  <a href="index.html" class="nav-logo">
+    <img src="images/Wonky Republic - Logo.png" alt="Wonky Republic">
+    <span>Wonky Republic</span>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="artistes.html" class="active">Artistes</a></li>
