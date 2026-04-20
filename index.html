@@ -1,8 +1,484 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=carlotta.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wonky Republic — Électronique tordue</title>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --rose: #ff3e8a;
+  --violet: #cc66ff;
+  --dark: #05000d;
+  --card: #0a0012;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: #e0d0ff;
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 80% 10%, rgba(255,62,138,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 10% 80%, rgba(180,0,255,0.07) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cellipse cx='60' cy='20' rx='5' ry='16' fill='rgba(255,62,138,0.02)' transform='rotate(0,60,60)'/%3E%3Cellipse cx='60' cy='20' rx='5' ry='16' fill='rgba(255,62,138,0.02)' transform='rotate(45,60,60)'/%3E%3Cellipse cx='60' cy='20' rx='5' ry='16' fill='rgba(255,62,138,0.02)' transform='rotate(90,60,60)'/%3E%3Cellipse cx='60' cy='20' rx='5' ry='16' fill='rgba(255,62,138,0.02)' transform='rotate(135,60,60)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(5,0,13,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,62,138,0.15);
+}
+.nav-logo {
+  font-family: 'Righteous', sans-serif;
+  font-size: 18px;
+  background: linear-gradient(90deg, var(--rose), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.08em;
+  filter: drop-shadow(0 0 8px rgba(255,62,138,0.3));
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,62,138,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--rose); }
+
+/* SECTION WRAPPER */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.section-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,62,138,0.3), transparent); }
+.section-line.r { background: linear-gradient(90deg, transparent, rgba(255,62,138,0.3)); }
+.section-title {
+  font-family: 'Righteous', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--rose), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* HERO */
+#hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+}
+.hero-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(255,62,138,0.45);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-label-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 16vw, 180px);
+  line-height: 0.88;
+  background: linear-gradient(160deg, #fff 0%, var(--rose) 50%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 60px rgba(255,62,138,0.25));
+  margin-bottom: 32px;
+  letter-spacing: 0.04em;
+}
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(14px, 2.5vw, 20px);
+  color: var(--violet);
+  margin-bottom: 20px;
+  max-width: 560px;
+}
+.hero-sub {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,62,138,0.35);
+  text-transform: uppercase;
+  margin-bottom: 56px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,62,138,0.3);
+  color: var(--rose);
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 3px;
+  transition: all 0.25s;
+  background: linear-gradient(135deg, rgba(255,62,138,0.08), rgba(180,0,255,0.05));
+}
+.btn:hover {
+  background: linear-gradient(135deg, rgba(255,62,138,0.2), rgba(180,0,255,0.12));
+  box-shadow: 0 0 24px rgba(255,62,138,0.2);
+  border-color: var(--rose);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: rgba(204,102,255,0.25);
+  color: var(--violet);
+}
+.btn-ghost:hover {
+  background: rgba(204,102,255,0.08);
+  border-color: var(--violet);
+  box-shadow: 0 0 24px rgba(204,102,255,0.15);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,62,138,0.2);
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, rgba(255,62,138,0.3), transparent);
+}
+
+/* ARTISTES TEASER */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.artist-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255,62,138,0.15);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.artist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(255,62,138,0.2), 0 10px 40px rgba(0,0,0,0.6);
+}
+.artist-card .photo {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+.artist-card .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: saturate(1.1) hue-rotate(-10deg);
+  transition: transform 0.4s;
+}
+.artist-card:hover .photo img { transform: scale(1.05); }
+.artist-card .photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255,62,138,0.08) 0%, rgba(180,0,255,0.06) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.artist-card .photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,0,13,0.9) 0%, transparent 50%);
+  z-index: 1;
+  pointer-events: none;
+}
+.artist-card .photo-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 16px 16px;
+  z-index: 2;
+}
+.artist-card .artist-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(255,62,138,0.4);
+}
+.artist-card .artist-pronoun {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--rose);
+  margin-left: 6px;
+}
+.artist-card .artist-genre {
+  font-size: 9px;
+  color: var(--violet);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.artist-card .card-footer {
+  background: var(--card);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,62,138,0.1);
+}
+.artist-card .card-tag {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(255,62,138,0.5);
+  text-transform: uppercase;
+}
+.artist-card .card-arrow {
+  color: var(--rose);
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.artist-card:hover .card-arrow { opacity: 1; transform: translateX(4px); }
+.artist-ghost {
+  border-radius: 4px;
+  border: 1px dashed rgba(255,62,138,0.1);
+  background: rgba(255,62,138,0.02);
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.ghost-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px dashed rgba(255,62,138,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: rgba(255,62,138,0.15);
+}
+.ghost-text {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(255,62,138,0.12);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 2;
+}
+.section-cta {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255,62,138,0.1);
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+.footer-logo {
+  font-family: 'Righteous', sans-serif;
+  font-size: 14px;
+  background: linear-gradient(90deg, var(--rose), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-text {
+  font-size: 8px;
+  color: rgba(255,62,138,0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.barcode { display: flex; gap: 2px; align-items: flex-end; height: 18px; }
+.b { background: var(--rose); opacity: 0.2; width: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 20px; }
+
+  #hero { padding: 100px 24px 60px; }
+
+  .section { padding: 60px 24px; }
+
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .artists-grid .artist-ghost:last-child { display: none; }
+
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 14px 16px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 9px; letter-spacing: 0.1em; }
+
+  #hero { padding: 90px 16px 60px; }
+
+  .section { padding: 48px 16px; }
+
+  .artists-grid { grid-template-columns: 1fr; }
+  .artists-grid .artist-ghost { display: none; }
+
+  footer { padding: 20px 16px; }
+}
+</style>
 </head>
-<body></body>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Wonky Republic</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Accueil</a></li>
+    <li><a href="artistes.html">Artistes</a></li>
+    <li><a href="carlotta.html">Carlotta</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">* Toulouse — France * Label indépendant *</div>
+  <div class="hero-label-name">Wonky<br>Republic</div>
+  <div class="hero-tagline">Électronique tordue pour corps désaxés et oreilles curieuses.</div>
+  <div class="hero-sub">Wonky Psybass · Glitch Bass · Électronique expérimentale</div>
+  <div class="hero-ctas">
+    <a href="artistes.html" class="btn">Découvrir les artistes →</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ARTISTES -->
+<section class="section" id="artistes">
+  <div class="section-header">
+    <div class="section-line"></div>
+    <div class="section-title">* Artistes *</div>
+    <div class="section-line r"></div>
+  </div>
+  <div class="artists-grid">
+    <a href="carlotta.html" class="artist-card">
+      <div class="photo">
+        <img src="images/carlotta/carlotta.jpeg" alt="Carlotta">
+        <div class="photo-info">
+          <div class="artist-name">CARLOTTA<span class="artist-pronoun">ielle</span></div>
+          <div class="artist-genre">Wonky Psybass</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-tag">Agent de securite des basses</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+    <div class="artist-ghost">
+      <div class="ghost-icon">?</div>
+      <div class="ghost-text">Bientot<br>sur le label</div>
+    </div>
+    <div class="artist-ghost">
+      <div class="ghost-icon">?</div>
+      <div class="ghost-text">Bientot<br>sur le label</div>
+    </div>
+  </div>
+  <div class="section-cta">
+    <a href="artistes.html" class="btn btn-ghost">Voir tous les artistes →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Wonky Republic</div>
+  <div class="barcode">
+    <div class="b" style="height:14px"></div>
+    <div class="b" style="height:18px"></div>
+    <div class="b" style="height:10px"></div>
+    <div class="b" style="height:18px"></div>
+    <div class="b" style="height:13px"></div>
+    <div class="b" style="height:18px"></div>
+    <div class="b" style="height:8px"></div>
+    <div class="b" style="height:16px"></div>
+    <div class="b" style="height:18px"></div>
+    <div class="b" style="height:11px"></div>
+  </div>
+  <div class="footer-text">WR-001 / Psybass Division</div>
+</footer>
+
+</body>
 </html>
